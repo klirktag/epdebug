@@ -1,9 +1,10 @@
 import inspect
+import traceback
 
 def hello():
-    print("hello world")
+    print("hello world from epdebug")
 
-def methods_from_object(the_object):
+def print_object(the_object):
     print("class name is ")
     print(the_object.__class__.__name__)
     # https://stackoverflow.com/questions/697320/how-do-i-get-the-filepath-for-a-class-in-python
@@ -27,3 +28,15 @@ def methods_from_object(the_object):
 
     for property_name in property_list:
         print("property "+property_name)
+
+def print_trace():
+    # Using FrameSummery
+    # https://docs.python.org/3/library/traceback.html#framesummary-objects
+    # Inspired by
+    # https://stackoverflow.com/questions/3702675/catch-and-print-full-python-exception-traceback-without-halting-exiting-the-prog
+    print("printing stack trace")
+    frames = traceback.extract_stack()
+    for frame in frames:
+        print("filename: "+frame.filename+":"+str(frame.lineno)+" in "+frame.name+"(...))")
+        print("code: "+frame.line)
+        print("")
